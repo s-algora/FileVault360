@@ -97,9 +97,7 @@ export async function enqueueMessage(message: object): Promise<void> {
   await queueClient.sendMessage(encoded);
 }
 
-export async function uploadFileShare(fileName: string, buffer: Buffer, contentType: string): Promise<string> {
-  // contentType is accepted for API consistency but Azure File Share doesn't support per-file content-type headers
-  void contentType;
+export async function uploadFileShare(fileName: string, buffer: Buffer, _contentType: string): Promise<string> {
   const fileClient = shareDirectoryClient.getFileClient(fileName);
   await fileClient.create(buffer.length);
   await fileClient.uploadData(buffer);
